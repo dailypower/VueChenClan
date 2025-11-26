@@ -81,8 +81,9 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IConfiguration _configuration;
         private static DateTime? SystemStartTime { get; set; }
-        public UserController(UserManager<IdentityUser> userManager, IUnitOfWork unitOfWork, RoleManager<IdentityRole> roleManager) {
+        public UserController(UserManager<IdentityUser> userManager, IUnitOfWork unitOfWork, RoleManager<IdentityRole> roleManager, IConfiguration configuration) {
             // System start time 2025 07 15 22:17
             if (SystemStartTime == null)
             {
@@ -90,7 +91,8 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             }
             _unitOfWork = unitOfWork;
             _roleManager = roleManager;
-            _userManager = userManager;             
+            _userManager = userManager;
+            _configuration = configuration;
         }
         public IActionResult Index() 
         {         
@@ -173,52 +175,6 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         }
 
 
-        #region API CALLS
-
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            List<ApplicationUser> objUserList = _unitOfWork.ApplicationUser.GetAll(includeProperties: "Company").ToList();
-
-            foreach(var user in objUserList) {
-
-                user.Role=  _userManager.GetRolesAsync(user).GetAwaiter().GetResult().FirstOrDefault();
-
-                if (user.Company == null) {
-                    user.Company = new Company() {
-                        Name = ""
-                    };
-                }
-            }
-
-            return Json(new { data = objUserList });
-        }
-
-
-        [HttpPost]
-        public IActionResult LockUnlock([FromBody]string id)
-        {
-
-            var objFromDb = _unitOfWork.ApplicationUser.Get(u => u.Id == id);
-            if (objFromDb == null) 
-            {
-                TempData["Success"] = "帳號 鎖定/開啟 成功";
-                return Json(new { success = false, message = "帳號 鎖定/開啟 成功" });
-            }
-
-            if(objFromDb.LockoutEnd!=null && objFromDb.LockoutEnd > DateTime.Now) {
-                //user is currently locked and we need to unlock them
-                objFromDb.LockoutEnd = DateTime.Now;
-            }
-            else {
-                objFromDb.LockoutEnd = DateTime.Now.AddYears(1000);
-            }
-            _unitOfWork.ApplicationUser.Update(objFromDb);
-            string strResult = _unitOfWork.Save();
-            TempData["Success"] = "帳號 變更-成功" + strResult;
-            return Json(new { success = true, message = "帳號 變更-成功" });
-        }
-
-        #endregion
+        // API endpoints moved to `UserApiController` (api/admin/user)
     }
 }

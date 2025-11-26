@@ -17,12 +17,14 @@ namespace BulkyBookWeb.Areas.Admin.Controllers {
 	public class OrderController : Controller {
 
 
-		private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IConfiguration _configuration;
         [BindProperty]
         public OrderVM OrderVM { get; set; }
-        public OrderController(IUnitOfWork unitOfWork)
+        public OrderController(IUnitOfWork unitOfWork, IConfiguration configuration)
         {
             _unitOfWork = unitOfWork;
+            _configuration = configuration;
         }
 
         public IActionResult Index() {
@@ -203,49 +205,6 @@ namespace BulkyBookWeb.Areas.Admin.Controllers {
 
 
 
-        #region API CALLS
-
-        [HttpGet]
-		public IActionResult GetAll(string status) {
-            IEnumerable<OrderHeader> objOrderHeaders;
-
-
-            if(User.IsInRole(SD.Role_Admin)|| User.IsInRole(SD.Role_Employee)) {
-                objOrderHeaders = _unitOfWork.OrderHeader.GetAll(includeProperties: "ApplicationUser").ToList();
-            }
-            else {
-
-                var claimsIdentity = (ClaimsIdentity)User.Identity;
-                var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-                objOrderHeaders = _unitOfWork.OrderHeader
-                    .GetAll(u => u.ApplicationUserId == userId, includeProperties: "ApplicationUser");
-            }
-
-
-            switch (status) {
-                case "pending":   //pending 尚未繳費
-                    objOrderHeaders = objOrderHeaders.Where(u => u.OrderStatus == SD.StatusPending); //PaymentStatusDelayedPayment 2025.03.21 23:38
-                    break;
-                case "inprocess": //inprocess 處理中
-                    objOrderHeaders = objOrderHeaders.Where(u => u.OrderStatus == SD.StatusInProcess);
-                    break;          
-                case "approved":  //approved 已核准
-                    objOrderHeaders = objOrderHeaders.Where(u => u.OrderStatus == SD.StatusApproved);
-                    break;
-                case "completed":  //completed 報名完成
-                    objOrderHeaders = objOrderHeaders.Where(u => u.OrderStatus == SD.StatusShipped);
-                    break;
-                default:
-                    break;
-
-            }
-
-
-            return Json(new { data = objOrderHeaders });
-		}
-
-
-		#endregion
+        // API endpoints moved to `OrderApiController` (api/admin/order)
 	}
 }

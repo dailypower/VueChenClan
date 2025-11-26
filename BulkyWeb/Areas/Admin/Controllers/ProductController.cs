@@ -18,10 +18,12 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
+        private readonly IConfiguration _configuration;
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, IConfiguration configuration)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
+            _configuration = configuration;
         }
         public IActionResult Index() 
         {
@@ -179,46 +181,6 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             return RedirectToAction(nameof(Upsert), new { id = productId });
         }
 
-        #region API CALLS
-
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-
-            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category,Company").ToList();
-
-            return Json(new { data = objProductList });
-        }
-
-
-        [HttpDelete]
-        public IActionResult Delete(int? id)
-        {
-            var productToBeDeleted = _unitOfWork.Product.Get(u => u.Id == id);
-            if (productToBeDeleted == null)
-            {
-                return Json(new { success = false, message = "Error while deleting" });
-            }
-
-            string productPath = @"images\products\product-" + id;
-            string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, productPath);
-
-            if (Directory.Exists(finalPath)) {
-                string[] filePaths = Directory.GetFiles(finalPath);
-                foreach (string filePath in filePaths) {
-                    System.IO.File.Delete(filePath);
-                }
-
-                Directory.Delete(finalPath);
-            }
-
-
-            _unitOfWork.Product.Remove(productToBeDeleted);
-            string strResult = _unitOfWork.Save();
-
-            return Json(new { success = true, message = "[活動照片]刪除成功" });
-        }
-
-        #endregion
+        // API endpoints moved to `ProductApiController` (api/admin/product)
     }
 }

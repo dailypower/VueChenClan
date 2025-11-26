@@ -16,9 +16,11 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
     public class CompanyController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public CompanyController(IUnitOfWork unitOfWork)
+        private readonly IConfiguration _configuration;
+        public CompanyController(IUnitOfWork unitOfWork, IConfiguration configuration)
         {
             _unitOfWork = unitOfWork;
+            _configuration = configuration;
         }
         public IActionResult Index() 
         {
@@ -75,31 +77,6 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         }
 
 
-        #region API CALLS
-
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            List<Company> objCompanyList = _unitOfWork.Company.GetAll().ToList();
-            return Json(new { data = objCompanyList });
-        }
-
-
-        [HttpDelete]
-        public IActionResult Delete(int? id)
-        {
-            var CompanyToBeDeleted = _unitOfWork.Company.Get(u => u.Id == id);
-            if (CompanyToBeDeleted == null)
-            {
-                return Json(new { success = false, message = "刪除失敗" });
-            }
-
-            _unitOfWork.Company.Remove(CompanyToBeDeleted);
-            string strResult = _unitOfWork.Save();
-
-            return Json(new { success = true, message = "刪除成功" });
-        }
-
-        #endregion
+        // API endpoints moved to `CompanyApiController` (api/admin/company)
     }
 }

@@ -1,30 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using BulkyBook.DataAccess.Repository.IRepository;
 using BulkyBook.DataAcess.Data;
 using BulkyBook.Models;
 using BulkyBook.Models.ViewModels;
 using BulkyBook.Utility;
-using Humanizer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.CodeAnalysis.Elfie.Diagnostics;
-using Microsoft.Graph.Models;
-using Microsoft.Graph.Models.TermStore;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
-using Stripe.Climate;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Runtime.Intrinsics.X86;
-using static System.Collections.Specialized.BitVector32;
-using WebApplication = Microsoft.Graph.Models.WebApplication;
 
 namespace BulkyBookWeb.Areas.Admin.Controllers
 {
-    //???-???? 2025 05 15 12:01  KindnessPosition.cs
     [Area("Admin")]
- //   [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Customer)]
+    //   [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Customer)]
     public class KindnessController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -37,15 +25,6 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             _configuration = configuration;
             if (SystemStartTime == null) SystemStartTime = DateTime.Now;
             ViewBag.SystemStartTime = SystemStartTime;
-        }
-        public IActionResult Index(int? KindnessPositionId)
-        {
-            ReadKindnessSetting(KindnessPositionId);
-            List<KindnessPosition> objKindnessPositionList = _unitOfWork.Kindness.GetAll().ToList();
-            //List<KindnessPosition> objKindnessPositionList = _unitOfWork.Kindness.GetAll(includeProperties: "ApplicationUser").ToList();
-            //IEnumerable<KindnessPosition> objKindnessPositionList = _unitOfWork.Kindness.GetAll().Where(item=> item.PositionId.Length>0).ToList();
-
-            return View(objKindnessPositionList);
         }
 
         /// <summary>
@@ -204,86 +183,6 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             return View();
         }
 
-        /// <summary>
-        /// 2025 07 07 14:56
-        /// Imports kindness position data from an Excel file and validates the input rows.
-        /// </summary>
-        /// <remarks>This method processes a list of kindness position data provided in the request body,
-        /// validates each row,  and saves valid rows to the database. Validation includes checking required fields,
-        /// ensuring values conform  to expected formats, and verifying that position IDs are unique within the
-        /// database. If any validation errors are found, the method returns a response containing the error
-        /// details.</remarks>
-        /// <param name="importedRows">A list of <see cref="KindnessPositionViewModel"/> objects representing the rows to be imported. Each object
-        /// should contain the necessary data for an ancestral position, such as name, floor, section, level,  position,
-        /// position ID, and applicant information.</param>
-        /// <returns>An <see cref="IActionResult"/> containing the result of the import operation.  If validation errors are
-        /// found, the response includes a list of error messages and indicates failure.  If all rows are valid, the
-        /// response indicates success.</returns>
-        [HttpPost]
-        public IActionResult ImportExcel([FromBody] List<KindnessPositionViewModel> importedRows)
-        {
-            var errors = new List<string>();
-            var validRows = new List<KindnessPosition>();
-
-            for (int i = 0; i < importedRows.Count; i++)
-            {
-                var row = importedRows[i];
-                int rowNum = i + 2; // Excel row number (header is row 1)
-
-                // Example validation rules
-                if (string.IsNullOrWhiteSpace(row.Name))
-                    errors.Add($"?{rowNum}?: ???????");
-                if (row.Floor != "1?" && row.Floor != "2?" && row.Floor != "3?")
-                    errors.Add($"?{rowNum}?: ????'1?'?'2?'?'3?'");
-                if (string.IsNullOrWhiteSpace(row.Section))
-                    errors.Add($"?{rowNum}?: ????");
-                if (string.IsNullOrWhiteSpace(row.Level))
-                    errors.Add($"?{rowNum}?: ????");
-                //      if (!int.TryParse(row.Level, out _))
-                //      errors.Add($"?{rowNum}?: ??????");
-                if (string.IsNullOrWhiteSpace(row.Position))
-                    errors.Add($"?{rowNum}?: ?????");
-                if (string.IsNullOrWhiteSpace(row.PositionId))
-                    errors.Add($"?{rowNum}?: ?????");
-
-                // Example: check for duplicates in DB
-                // commented:2025 08 25
-                //if (_unitOfWork.Kindness.Get(a => a.PositionId == row.PositionId) != null)
-                //    errors.Add($"?{rowNum}?: ???? [{row.PositionId}] ???????");
-                // commented:2025 08 25
-
-                // If no errors for this row, add to validRows
-                if (!errors.Any(e => e.StartsWith($"?{rowNum}?")))
-                {
-                    validRows.Add(new KindnessPosition
-                    {
-                        Name = row.Name,
-                        Floor = row.Floor,
-                        Section = row.Section,
-                        Level = row.Level,
-                        Position = row.Position,
-                        PositionId = row.PositionId,
-                        Applicant = row.Applicant,
-                        Relation = row.Relation,
-                        Mobile_Tel = row.Mobile_Tel,
-                        Note = row.Note
-                    });
-                }
-            }
-
-            if (errors.Count > 0)
-                return Json(new { success = false, errors });
-
-            // Save validRows to DB
-            foreach (var entity in validRows)
-            {
-                _unitOfWork.Kindness.Add(entity);
-            }
-            _unitOfWork.Save();
-
-            return Json(new { success = true });
-        }
-
         public IActionResult Upsert(int? KindnessPositionId)
         {
 
@@ -329,49 +228,11 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
         //        2. Create a Server Endpoint to Receive the Data
         //In your controller(e.g., OrderController.cs), add an action to receive and save the data:
         [HttpPost]
-        public IActionResult SavePositions([FromBody] string displaytext)  //eg: ????..1?,??,7?????:246
+        public IActionResult SavePositions([FromBody] string displaytext)  //eg: displaytext like "1?-??-7?:246"
         {
-            try
-            {
-                // ?????????
-                string splitter_colon = ":";
-                string splitter_floor = "?";
-                string splitter_section = "?";
-                string splitter_level = "?";
-
-                int colon_Index = displaytext.IndexOf(splitter_colon); //????..1?,??,7?????:246
-                int floor_Index = displaytext.IndexOf(splitter_floor);
-                int section_Index = displaytext.IndexOf(splitter_section);
-                int level_Index = displaytext.IndexOf(splitter_level);
-                     
-                string floor = displaytext.Substring(floor_Index-1,2); //?
-                string section = displaytext.Substring(section_Index-1,2); ;//?
-                string level = displaytext.Substring(level_Index-1, 2); ; //?
-                string position = displaytext.Substring(colon_Index+1);  //?
-                //string sPositionId = floor + "-" + section + "-" + level + ":" + position;
-                string sPositionId = displaytext;
-                //Select Obj of sKindnessPositionId
-                // TODO: kindnessPositionId should be passed as a parameter from the client
-                KindnessPosition KindnessPositionObj = null;
-                // Attempt to extract position ID from displaytext or use default
-                KindnessPositionObj.PositionId = sPositionId;
-                KindnessPositionObj.Floor = floor;
-                KindnessPositionObj.Section = section;
-                KindnessPositionObj.Level = level;
-                KindnessPositionObj.Position = position;
-
-                //do db_change:
-                _unitOfWork.Kindness.Update(KindnessPositionObj);
-                string strResult = _unitOfWork.Save();
-                TempData["success"] = "??????~" + strResult;
-                //return RedirectToAction("Index");
-                return Json(new { success = true });
-            }
-            catch (Exception ex)
-            {
-                // ??? log
-                return Json(new { success = false, message = ex.Message });
-            }
+            // This MVC controller no longer performs direct position updates.
+            // Use the API endpoint `POST /api/admin/kindness/saveposition` instead.
+            return BadRequest(new { success = false, message = "Use API endpoint /api/admin/kindness/saveposition" });
         }
     }
 }
