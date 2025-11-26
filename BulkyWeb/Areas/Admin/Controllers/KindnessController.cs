@@ -99,6 +99,17 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
                 {
                     positionId = "0?-0?-0?:000"; //???????
                     ViewBag.PositionId = positionId; //???????
+                    // Create default object if not found
+                    KindnessCurrentPositionObj = new KindnessPosition
+                    {
+                        KindnessPositionId = 0,
+                        PositionId = positionId,
+                        Name = "",
+                        Floor = "1?",
+                        Section = "??",
+                        Level = "1?",
+                        Position = "000"
+                    };
                 }
                 else
                 {
@@ -176,7 +187,32 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             ViewBag.floor = floor; //?????-? 
             ViewBag.section = section; //?????-? 
             ViewBag.level = level; //?????-? 
-            ViewBag.position = position; //?????-?           
+            ViewBag.position = position; //?????-?
+            
+            // Initialize layout ViewBag properties for serialization in the view
+            // These are used for the 3D display layout but may be stubbed/empty if functionality not implemented
+            ViewBag.KindnessLayout_1F = ViewBag.KindnessLayout_1F ?? new List<string>();
+            ViewBag.KindnessLayout_2F = ViewBag.KindnessLayout_2F ?? new List<string>();
+            ViewBag.KindnessLayout_3F = ViewBag.KindnessLayout_3F ?? new List<string>();
+            ViewBag.kf1arow1 = ViewBag.kf1arow1 ?? new List<string>();
+            ViewBag.kf1arow2 = ViewBag.kf1arow2 ?? new List<string>();
+            ViewBag.kf1arow3 = ViewBag.kf1arow3 ?? new List<string>();
+            ViewBag.kf1arow4 = ViewBag.kf1arow4 ?? new List<string>();
+            ViewBag.kf1brow1 = ViewBag.kf1brow1 ?? new List<string>();
+            ViewBag.kf1brow2 = ViewBag.kf1brow2 ?? new List<string>();
+            ViewBag.kf1brow3 = ViewBag.kf1brow3 ?? new List<string>();
+            ViewBag.kf1brow4 = ViewBag.kf1brow4 ?? new List<string>();
+            ViewBag.kf1crow1 = ViewBag.kf1crow1 ?? new List<string>();
+            ViewBag.kf1crow2 = ViewBag.kf1crow2 ?? new List<string>();
+            ViewBag.kf1crow3 = ViewBag.kf1crow3 ?? new List<string>();
+            ViewBag.kf1crow4 = ViewBag.kf1crow4 ?? new List<string>();
+            ViewBag.kf1drow1 = ViewBag.kf1drow1 ?? new List<string>();
+            ViewBag.kf1drow2 = ViewBag.kf1drow2 ?? new List<string>();
+            ViewBag.kf1drow3 = ViewBag.kf1drow3 ?? new List<string>();
+            ViewBag.kf1drow4 = ViewBag.kf1drow4 ?? new List<string>();
+            ViewBag.kf1erow1 = ViewBag.kf1erow1 ?? new List<string>();
+            ViewBag.kf1erow2 = ViewBag.kf1erow2 ?? new List<string>();
+                       
             return View(KindnessCurrentPositionObj);
         }
 

@@ -1,10 +1,10 @@
-﻿@model AncestralPosition
+@model AncestralPosition
 @using System.Text.Json
 @{
 
     var builder = WebApplication.CreateBuilder();
     ViewBag.PublishDate = builder.Configuration.GetValue<string>("PublishDate");
-    ViewData["Title"] = "財團法人台中市私立銀同碧湖陳氏社會福利基金會-祖先塔位暨牌位管理資訊系統（準預覽版本）";
+    ViewData["Title"] = "??????????????????????-?????????????(?????)";
     string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
     // Auto logout settings
@@ -48,10 +48,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 開頭設定CSS連結路徑 -->
+    <!-- ????CSS???? -->
     <link rel="stylesheet" href="~/css/position_Display.css" asp-append-version="true" />
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-    <title>陳氏宗祠-祖先牌位設定</title>
+    <title>????-??????</title>
 </head>
 
 <body>
@@ -61,17 +61,17 @@
         </div>
     </header>
     <a asp-action="PositionQuery" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold  text-uppercase">
-        <label style="font-size:30px;color:darkgreen;font-weight:bolder">回上一頁</label>
+        <label style="font-size:30px;color:darkgreen;font-weight:bolder">????</label>
     </a>
-    <h2>陳氏宗祠-祖先牌位</h2>
+    <h2>????-????</h2>
     <div class="card-body p-4">
-        <label>祖先</label>
+        <label>??</label>
         <label id="Ancestral_Name" class="displaylabel blink_name">@Model.Name</label>
         <label id="Ancestral_PositionId" class="displaylabel blink_name">@Model.PositionId</label>
-    @*     <label id="Ancestral_Applicant">申請人:@Model.Applicant</label> *@
+    @*     <label id="Ancestral_Applicant">???:@Model.Applicant</label> *@
         <label></label>
     </div>
-    <h2> 側邊,區域</h2>
+    <h2> ??,??</h2>
     <div>
         <div id="RootDiv_Ancestral_layout" class="position-container-Ancestral-layout"></div>
     </div>
@@ -100,32 +100,32 @@
     <div id="MseModal" class="modal-overlay" style="display:none;">
         <span class="close-btn" onclick="closeMsgModal()">&times;</span>
         <div class="modal-content yesno-modal">
-            <h2 id="MsgModalTitle" class="yesno-title">訊息視窗</h2>
+            <h2 id="MsgModalTitle" class="yesno-title">????</h2>
             <p id="MsgModalMessage" class="yesno-message"></p>
         </div>
     </div>
-    <h2>銀同碧湖陳氏宗祠祖先牌位</h2>
+    <h2>????????????</h2>
     <div class="col-12 text-center fw-bolder">
-        <img src="~/images/Ancestral/Ancestral_layout_1.jpg" alt="祖先牌位" style="max-width:100%;height:auto;" />
+        <img src="~/images/Ancestral/Ancestral_layout_1.jpg" alt="????" style="max-width:100%;height:auto;" />
     </div>
     <div class="col-12 text-center fw-bolder">
-        <img src="~/images/Ancestral/Ancestral_note_1.jpg" alt="祖先牌位示意圖" style="max-width:100%;height:auto;" />
+        <img src="~/images/Ancestral/Ancestral_note_1.jpg" alt="???????" style="max-width:100%;height:auto;" />
     </div>
     <div class="col-12 text-center fw-bolder">
-        <img src="~/images/Ancestral/Ancestral_note_0.jpg" alt="祖先牌位編排說明" style="max-width:100%;height:auto;" />
+        <img src="~/images/Ancestral/Ancestral_note_0.jpg" alt="????????" style="max-width:100%;height:auto;" />
     </div>
 
     <div id="autoLogoutWarning">
         <div class="modal-content">
-            <h4 style="color:#c0392b;">即將自動導到本會[問卷調查]....</h4>
-            <p style="color:blue;font-size:xx-large;font-weight:bolder">您已經有一段時間沒有操作,將於 <span style="color:red;font-size:larger" id="logoutCountdown">@ViewBag.WARNING_BEFORE_LOGOUT_SECOND</span> 秒後自動導到本會[問卷調查](ADP)。</p>
-            <button onclick="stayLoggedIn()" class="btn btn-primary">[繼續使用]</button>
+            <h4 style="color:#c0392b;">????????[????]....</h4>
+            <p style="color:blue;font-size:xx-large;font-weight:bolder">????????????,?? <span style="color:red;font-size:larger" id="logoutCountdown">@ViewBag.WARNING_BEFORE_LOGOUT_SECOND</span> ????????[????](ADP)?</p>
+            <button onclick="stayLoggedIn()" class="btn btn-primary">[????]</button>
         </div>
     </div>
-    <button id="goTopBtn" class="btn btn-danger">回到頂部</button>
+    <button id="goTopBtn" class="btn btn-danger">????</button>
     <div id="workDurationWarning" style="display:none; position:fixed; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.3); z-index:9999; align-items:center; justify-content:center;">
         <div class="modal-content" style="background:#fff; padding:2rem 2.5rem; border-radius:10px; box-shadow:0 4px 24px rgba(0,0,0,0.18); text-align:center; max-width:90vw;">
-            <p style="color:blue;font-size:xx-large;font-weight:bolder">您已經有一段時間沒有操作,您的連線將於 <span style="color:red;font-size:larger" id="workLogoutCountdown">@ViewBag.WORK_WARNING_SECONDS</span> 秒後結束，系統將導到[本會[問卷調查]](ADP)。</p>
+            <p style="color:blue;font-size:xx-large;font-weight:bolder">????????????,?????? <span style="color:red;font-size:larger" id="workLogoutCountdown">@ViewBag.WORK_WARNING_SECONDS</span> ????,?????[??[????]](ADP)?</p>
         </div>
     </div>
 </body>
@@ -135,561 +135,561 @@
 
 
         //////////////////////////
-        //0.讀取 左,右側,區編號.
-        // (右側) r側 各區 空格
+        //0.?? ?,??,???.
+        // (??) r? ?? ??
         /////////////////////////
-        // 取得右側各區編碼:甲,丙,戊,庚
-        var arlayout=@Html.Raw(JsonSerializer.Serialize(ViewBag.AncestralLayout_R));
-         // 取得左側各區編碼:乙,丁,己,辛
-        var allayout=@Html.Raw(JsonSerializer.Serialize(ViewBag.AncestralLayout_L));
-         // 取得左側/右側各區編碼:乙,丁,己,辛,開浯始祖一郎公,甲,丙,戊,庚
-        var alayout=@Html.Raw(JsonSerializer.Serialize(ViewBag.AncestralLayout));
+        // ????????:?,?,?,?
+        var arlayout=@Html.Raw(JsonSerializer.Serialize<object>(ViewBag.AncestralLayout_R));
+         // ????????:?,?,?,?
+        var allayout=@Html.Raw(JsonSerializer.Serialize<object>(ViewBag.AncestralLayout_L));
+         // ????/??????:?,?,?,?,???????,?,?,?,?
+        var alayout=@Html.Raw(JsonSerializer.Serialize<object>(ViewBag.AncestralLayout));
 
         //////////////////////////
-        //一.讀取各樓層塔位資料
-        // (右側) r側 各區 空格
+        //?.?????????
+        // (??) r? ?? ??
         /////////////////////////
-        // 甲區 第1到10列:
-        // 取得甲區第1列的空格編號
-        var ararow1 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ararow1));
-        // 取得甲區第2列的空格編號
-        var ararow2 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ararow2));
-        // 取得甲區第3列的空格編號
-        var ararow3 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ararow3));
-        // 取得甲區第4列的空格編號
-        var ararow4 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ararow4));
-        // 取得甲區第5列的空格編號
-        var ararow5 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ararow5));
-        // 取得甲區第6列的空格編號
-        var ararow6 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ararow6));
-        // 取得甲區第7列的空格編號
-        var ararow7 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ararow7));
-        // 取得甲區第8列的空格編號
-        var ararow8 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ararow8));
-        // 取得甲區第9列的空格編號
-        var ararow9 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ararow9));
-        // 取得甲區第10列的空格編號
-        var ararow10 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ararow10));
+        // ?? ?1?10?:
+        // ?????1??????
+        var ararow1 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ararow1));
+        // ?????2??????
+        var ararow2 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ararow2));
+        // ?????3??????
+        var ararow3 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ararow3));
+        // ?????4??????
+        var ararow4 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ararow4));
+        // ?????5??????
+        var ararow5 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ararow5));
+        // ?????6??????
+        var ararow6 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ararow6));
+        // ?????7??????
+        var ararow7 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ararow7));
+        // ?????8??????
+        var ararow8 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ararow8));
+        // ?????9??????
+        var ararow9 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ararow9));
+        // ?????10??????
+        var ararow10 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ararow10));
 
-        // 乙區 第1到10列:
-        // 取得乙區第1列的空格編號
-        var arbrow1 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arbrow1));
-        // 取得乙區第2列的空格編號
-        var arbrow2 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arbrow2));
-        // 取得乙區第3列的空格編號
-        var arbrow3 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arbrow3));
-        // 取得乙區第4列的空格編號
-        var arbrow4 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arbrow4));
-        // 取得乙區第5列的空格編號
-        var arbrow5 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arbrow5));
-        // 取得乙區第6列的空格編號
-        var arbrow6 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arbrow6));
-        // 取得乙區第7列的空格編號
-        var arbrow7 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arbrow7));
-        // 取得乙區第8列的空格編號
-        var arbrow8 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arbrow8));
-        // 取得乙區第9列的空格編號
-        var arbrow9 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arbrow9));
-        // 取得乙區第10列的空格編號
-        var arbrow10 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arbrow10));
+        // ?? ?1?10?:
+        // ?????1??????
+        var arbrow1 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arbrow1));
+        // ?????2??????
+        var arbrow2 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arbrow2));
+        // ?????3??????
+        var arbrow3 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arbrow3));
+        // ?????4??????
+        var arbrow4 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arbrow4));
+        // ?????5??????
+        var arbrow5 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arbrow5));
+        // ?????6??????
+        var arbrow6 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arbrow6));
+        // ?????7??????
+        var arbrow7 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arbrow7));
+        // ?????8??????
+        var arbrow8 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arbrow8));
+        // ?????9??????
+        var arbrow9 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arbrow9));
+        // ?????10??????
+        var arbrow10 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arbrow10));
 
-        // 丙區 第1到10列:
-        // 取得丙區第1列的空格編號
-        var arcrow1 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arcrow1));
-        // 取得丙區第2列的空格編號
-        var arcrow2 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arcrow2));
-        // 取得丙區第3列的空格編號
-        var arcrow3 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arcrow3));
-        // 取得丙區第4列的空格編號
-        var arcrow4 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arcrow4));
-        // 取得丙區第5列的空格編號
-        var arcrow5 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arcrow5));
-        // 取得丙區第6列的空格編號
-        var arcrow6 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arcrow6));
-        // 取得丙區第7列的空格編號
-        var arcrow7 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arcrow7));
-        // 取得丙區第8列的空格編號
-        var arcrow8 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arcrow8));
-        // 取得丙區第9列的空格編號
-        var arcrow9 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arcrow9));
-        // 取得丙區第10列的空格編號
-        var arcrow10 = @Html.Raw(JsonSerializer.Serialize(ViewBag.arcrow10));
+        // ?? ?1?10?:
+        // ?????1??????
+        var arcrow1 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arcrow1));
+        // ?????2??????
+        var arcrow2 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arcrow2));
+        // ?????3??????
+        var arcrow3 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arcrow3));
+        // ?????4??????
+        var arcrow4 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arcrow4));
+        // ?????5??????
+        var arcrow5 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arcrow5));
+        // ?????6??????
+        var arcrow6 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arcrow6));
+        // ?????7??????
+        var arcrow7 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arcrow7));
+        // ?????8??????
+        var arcrow8 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arcrow8));
+        // ?????9??????
+        var arcrow9 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arcrow9));
+        // ?????10??????
+        var arcrow10 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.arcrow10));
 
-        // 丁區 第1到10列:
-        // 取得丁區第1列的空格編號
-        var ardrow1 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ardrow1));
-        // 取得丁區第2列的空格編號
-        var ardrow2 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ardrow2));
-        // 取得丁區第3列的空格編號
-        var ardrow3 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ardrow3));
-        // 取得丁區第4列的空格編號
-        var ardrow4 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ardrow4));
-        // 取得丁區第5列的空格編號
-        var ardrow5 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ardrow5));
-        // 取得丁區第6列的空格編號
-        var ardrow6 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ardrow6));
-        // 取得丁區第7列的空格編號
-        var ardrow7 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ardrow7));
-        // 取得丁區第8列的空格編號
-        var ardrow8 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ardrow8));
-        // 取得丁區第9列的空格編號
-        var ardrow9 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ardrow9));
-        // 取得丁區第10列的空格編號
-        var ardrow10 = @Html.Raw(JsonSerializer.Serialize(ViewBag.ardrow10));
+        // ?? ?1?10?:
+        // ?????1??????
+        var ardrow1 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ardrow1));
+        // ?????2??????
+        var ardrow2 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ardrow2));
+        // ?????3??????
+        var ardrow3 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ardrow3));
+        // ?????4??????
+        var ardrow4 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ardrow4));
+        // ?????5??????
+        var ardrow5 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ardrow5));
+        // ?????6??????
+        var ardrow6 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ardrow6));
+        // ?????7??????
+        var ardrow7 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ardrow7));
+        // ?????8??????
+        var ardrow8 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ardrow8));
+        // ?????9??????
+        var ardrow9 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ardrow9));
+        // ?????10??????
+        var ardrow10 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ardrow10));
 
         //2025 08 26 14:27
-        // 中區 右側 第1到10列:
-        // 取得丁區第1列的空格編號
-        var armrow1 = @Html.Raw(JsonSerializer.Serialize(ViewBag.armrow1));
-        // 取得丁區第2列的空格編號
-        var armrow2 = @Html.Raw(JsonSerializer.Serialize(ViewBag.armrow2));
-        // 取得丁區第3列的空格編號
-        var armrow3 = @Html.Raw(JsonSerializer.Serialize(ViewBag.armrow3));
-        // 取得丁區第4列的空格編號
-        var armrow4 = @Html.Raw(JsonSerializer.Serialize(ViewBag.armrow4));
-        // 取得丁區第5列的空格編號
-        var armrow5 = @Html.Raw(JsonSerializer.Serialize(ViewBag.armrow5));
-        // 取得丁區第6列的空格編號
-        var armrow6 = @Html.Raw(JsonSerializer.Serialize(ViewBag.armrow6));
-        // 取得丁區第7列的空格編號
-        var armrow7 = @Html.Raw(JsonSerializer.Serialize(ViewBag.armrow7));
-        // 取得丁區第8列的空格編號
-        var armrow8 = @Html.Raw(JsonSerializer.Serialize(ViewBag.armrow8));
-        // 取得丁區第9列的空格編號
-        var armrow9 = @Html.Raw(JsonSerializer.Serialize(ViewBag.armrow9));
-        // 取得丁區第10列的空格編號
-        var armrow10 = @Html.Raw(JsonSerializer.Serialize(ViewBag.armrow10));
+        // ?? ?? ?1?10?:
+        // ?????1??????
+        var armrow1 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.armrow1));
+        // ?????2??????
+        var armrow2 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.armrow2));
+        // ?????3??????
+        var armrow3 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.armrow3));
+        // ?????4??????
+        var armrow4 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.armrow4));
+        // ?????5??????
+        var armrow5 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.armrow5));
+        // ?????6??????
+        var armrow6 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.armrow6));
+        // ?????7??????
+        var armrow7 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.armrow7));
+        // ?????8??????
+        var armrow8 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.armrow8));
+        // ?????9??????
+        var armrow9 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.armrow9));
+        // ?????10??????
+        var armrow10 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.armrow10));
          //////////////////////////
-        //一.讀取各樓層塔位資料
-        // (左側) l側 各區 空格
+        //?.?????????
+        // (??) l? ?? ??
         /////////////////////////
-        // 甲區 第1到10列:
-        // 取得甲區第1列的空格編號
-        var alarow1 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alarow1));
-        // 取得甲區第2列的空格編號
-        var alarow2 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alarow2));
-        // 取得甲區第3列的空格編號
-        var alarow3 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alarow3));
-        // 取得甲區第4列的空格編號
-        var alarow4 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alarow4));
-        // 取得甲區第5列的空格編號
-        var alarow5 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alarow5));
-        // 取得甲區第6列的空格編號
-        var alarow6 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alarow6));
-        // 取得甲區第7列的空格編號
-        var alarow7 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alarow7));
-        // 取得甲區第8列的空格編號
-        var alarow8 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alarow8));
-        // 取得甲區第9列的空格編號
-        var alarow9 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alarow9));
-        // 取得甲區第10列的空格編號
-        var alarow10 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alarow10));
+        // ?? ?1?10?:
+        // ?????1??????
+        var alarow1 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alarow1));
+        // ?????2??????
+        var alarow2 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alarow2));
+        // ?????3??????
+        var alarow3 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alarow3));
+        // ?????4??????
+        var alarow4 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alarow4));
+        // ?????5??????
+        var alarow5 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alarow5));
+        // ?????6??????
+        var alarow6 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alarow6));
+        // ?????7??????
+        var alarow7 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alarow7));
+        // ?????8??????
+        var alarow8 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alarow8));
+        // ?????9??????
+        var alarow9 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alarow9));
+        // ?????10??????
+        var alarow10 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alarow10));
 
-        // 乙區 第1到10列:
-        // 取得乙區第1列的空格編號
-        var albrow1 = @Html.Raw(JsonSerializer.Serialize(ViewBag.albrow1));
-        // 取得乙區第2列的空格編號
-        var albrow2 = @Html.Raw(JsonSerializer.Serialize(ViewBag.albrow2));
-        // 取得乙區第3列的空格編號
-        var albrow3 = @Html.Raw(JsonSerializer.Serialize(ViewBag.albrow3));
-        // 取得乙區第4列的空格編號
-        var albrow4 = @Html.Raw(JsonSerializer.Serialize(ViewBag.albrow4));
-        // 取得乙區第5列的空格編號
-        var albrow5 = @Html.Raw(JsonSerializer.Serialize(ViewBag.albrow5));
-        // 取得乙區第6列的空格編號
-        var albrow6 = @Html.Raw(JsonSerializer.Serialize(ViewBag.albrow6));
-        // 取得乙區第7列的空格編號
-        var albrow7 = @Html.Raw(JsonSerializer.Serialize(ViewBag.albrow7));
-        // 取得乙區第8列的空格編號
-        var albrow8 = @Html.Raw(JsonSerializer.Serialize(ViewBag.albrow8));
-        // 取得乙區第9列的空格編號
-        var albrow9 = @Html.Raw(JsonSerializer.Serialize(ViewBag.albrow9));
-        // 取得乙區第10列的空格編號
-        var albrow10 = @Html.Raw(JsonSerializer.Serialize(ViewBag.albrow10));
+        // ?? ?1?10?:
+        // ?????1??????
+        var albrow1 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.albrow1));
+        // ?????2??????
+        var albrow2 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.albrow2));
+        // ?????3??????
+        var albrow3 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.albrow3));
+        // ?????4??????
+        var albrow4 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.albrow4));
+        // ?????5??????
+        var albrow5 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.albrow5));
+        // ?????6??????
+        var albrow6 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.albrow6));
+        // ?????7??????
+        var albrow7 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.albrow7));
+        // ?????8??????
+        var albrow8 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.albrow8));
+        // ?????9??????
+        var albrow9 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.albrow9));
+        // ?????10??????
+        var albrow10 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.albrow10));
 
-        // 丙區 第1到10列:
-        // 取得丙區第1列的空格編號
-        var alcrow1 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alcrow1));
-        // 取得丙區第2列的空格編號
-        var alcrow2 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alcrow2));
-        // 取得丙區第3列的空格編號
-        var alcrow3 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alcrow3));
-        // 取得丙區第4列的空格編號
-        var alcrow4 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alcrow4));
-        // 取得丙區第5列的空格編號
-        var alcrow5 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alcrow5));
-        // 取得丙區第6列的空格編號
-        var alcrow6 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alcrow6));
-        // 取得丙區第7列的空格編號
-        var alcrow7 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alcrow7));
-        // 取得丙區第8列的空格編號
-        var alcrow8 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alcrow8));
-        // 取得丙區第9列的空格編號
-        var alcrow9 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alcrow9));
-        // 取得丙區第10列的空格編號
-        var alcrow10 = @Html.Raw(JsonSerializer.Serialize(ViewBag.alcrow10));
+        // ?? ?1?10?:
+        // ?????1??????
+        var alcrow1 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alcrow1));
+        // ?????2??????
+        var alcrow2 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alcrow2));
+        // ?????3??????
+        var alcrow3 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alcrow3));
+        // ?????4??????
+        var alcrow4 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alcrow4));
+        // ?????5??????
+        var alcrow5 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alcrow5));
+        // ?????6??????
+        var alcrow6 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alcrow6));
+        // ?????7??????
+        var alcrow7 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alcrow7));
+        // ?????8??????
+        var alcrow8 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alcrow8));
+        // ?????9??????
+        var alcrow9 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alcrow9));
+        // ?????10??????
+        var alcrow10 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.alcrow10));
 
-        // 丁區 第1到10列:
-        // 取得丁區第1列的空格編號
-        var aldrow1 = @Html.Raw(JsonSerializer.Serialize(ViewBag.aldrow1));
-        // 取得丁區第2列的空格編號
-        var aldrow2 = @Html.Raw(JsonSerializer.Serialize(ViewBag.aldrow2));
-        // 取得丁區第3列的空格編號
-        var aldrow3 = @Html.Raw(JsonSerializer.Serialize(ViewBag.aldrow3));
-        // 取得丁區第4列的空格編號
-        var aldrow4 = @Html.Raw(JsonSerializer.Serialize(ViewBag.aldrow4));
-        // 取得丁區第5列的空格編號
-        var aldrow5 = @Html.Raw(JsonSerializer.Serialize(ViewBag.aldrow5));
-        // 取得丁區第6列的空格編號
-        var aldrow6 = @Html.Raw(JsonSerializer.Serialize(ViewBag.aldrow6));
-        // 取得丁區第7列的空格編號
-        var aldrow7 = @Html.Raw(JsonSerializer.Serialize(ViewBag.aldrow7));
-        // 取得丁區第8列的空格編號
-        var aldrow8 = @Html.Raw(JsonSerializer.Serialize(ViewBag.aldrow8));
-        // 取得丁區第9列的空格編號
-        var aldrow9 = @Html.Raw(JsonSerializer.Serialize(ViewBag.aldrow9));
-        // 取得丁區第10列的空格編號
-        var aldrow10 = @Html.Raw(JsonSerializer.Serialize(ViewBag.aldrow10));
+        // ?? ?1?10?:
+        // ?????1??????
+        var aldrow1 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.aldrow1));
+        // ?????2??????
+        var aldrow2 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.aldrow2));
+        // ?????3??????
+        var aldrow3 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.aldrow3));
+        // ?????4??????
+        var aldrow4 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.aldrow4));
+        // ?????5??????
+        var aldrow5 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.aldrow5));
+        // ?????6??????
+        var aldrow6 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.aldrow6));
+        // ?????7??????
+        var aldrow7 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.aldrow7));
+        // ?????8??????
+        var aldrow8 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.aldrow8));
+        // ?????9??????
+        var aldrow9 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.aldrow9));
+        // ?????10??????
+        var aldrow10 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.aldrow10));
 
         //2025 08 26 14:27
-        // 中區 左側 第1到10列:
-        // 取得丁區第1列的空格編號
-        var almrow1 = @Html.Raw(JsonSerializer.Serialize(ViewBag.almrow1));
-        // 取得丁區第2列的空格編號
-        var almrow2 = @Html.Raw(JsonSerializer.Serialize(ViewBag.almrow2));
-        // 取得丁區第3列的空格編號
-        var almrow3 = @Html.Raw(JsonSerializer.Serialize(ViewBag.almrow3));
-        // 取得丁區第4列的空格編號
-        var almrow4 = @Html.Raw(JsonSerializer.Serialize(ViewBag.almrow4));
-        // 取得丁區第5列的空格編號
-        var almrow5 = @Html.Raw(JsonSerializer.Serialize(ViewBag.almrow5));
-        // 取得丁區第6列的空格編號
-        var almrow6 = @Html.Raw(JsonSerializer.Serialize(ViewBag.almrow6));
-        // 取得丁區第7列的空格編號
-        var almrow7 = @Html.Raw(JsonSerializer.Serialize(ViewBag.almrow7));
-        // 取得丁區第8列的空格編號
-        var almrow8 = @Html.Raw(JsonSerializer.Serialize(ViewBag.almrow8));
-        // 取得丁區第9列的空格編號
-        var almrow9 = @Html.Raw(JsonSerializer.Serialize(ViewBag.almrow9));
-        // 取得丁區第10列的空格編號
-        var almrow10 = @Html.Raw(JsonSerializer.Serialize(ViewBag.almrow10));
+        // ?? ?? ?1?10?:
+        // ?????1??????
+        var almrow1 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.almrow1));
+        // ?????2??????
+        var almrow2 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.almrow2));
+        // ?????3??????
+        var almrow3 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.almrow3));
+        // ?????4??????
+        var almrow4 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.almrow4));
+        // ?????5??????
+        var almrow5 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.almrow5));
+        // ?????6??????
+        var almrow6 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.almrow6));
+        // ?????7??????
+        var almrow7 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.almrow7));
+        // ?????8??????
+        var almrow8 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.almrow8));
+        // ?????9??????
+        var almrow9 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.almrow9));
+        // ?????10??????
+        var almrow10 = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.almrow10));
 
         //////////////////////////////
-        // 二.建立各側.各區.各層牌位資料陣列
+        // ?.????.??.????????
         /////////////////////////////
 
-        //左側,甲區~丁區 各層牌位資料陣列
+        //??,??~?? ????????
         var positionary_alaary = Array.from({ length: @(ViewBag.lar ?? 0) }, () => Array(@(ViewBag.lac ?? 0)).fill(0));
-        // 取得甲區第1列的牌位編號
+        // ?????1??????
         positionary_alaary[0] = alarow1.split(",");
-        // 取得甲區第2列的牌編號
+        // ?????2?????
         positionary_alaary[1] = alarow2.split(",");
-        // 取得甲區第3列的牌位編號
+        // ?????3??????
         positionary_alaary[2] = alarow3.split(",");
-        // 取得甲區第4列的牌位編號
+        // ?????4??????
         positionary_alaary[3] = alarow4.split(",");
-        // 取得甲區第5列的牌位編號
+        // ?????5??????
         positionary_alaary[4] = alarow5.split(",");
-        // 取得甲區第6列的牌位編號
+        // ?????6??????
         positionary_alaary[5] = alarow6.split(",");
-        // 取得甲區第7列的牌位編號
+        // ?????7??????
         positionary_alaary[6] = alarow7.split(",");
-        // 取得甲區第8列的牌位編號
+        // ?????8??????
         positionary_alaary[7] = alarow8.split(",");
-        // 取得甲區第9列的牌位編號
+        // ?????9??????
         positionary_alaary[8] = alarow9.split(",");
-        // 取得甲區第10列的牌位編號
+        // ?????10??????
         positionary_alaary[9] = alarow10.split(",");
 
-        //乙區,各層牌位資料陣列
+        //??,????????
         var positionary_albary = Array.from({ length: @(ViewBag.lbr ?? 0) }, () => Array(@(ViewBag.lbc ?? 0)).fill(0));
-        // 取得乙區第1列的牌位編號
+        // ?????1??????
         positionary_albary[0] = albrow1.split(",");
-        // 取得乙區第2列的牌位編號
+        // ?????2??????
         positionary_albary[1] = albrow2.split(",");
-        // 取得乙區第3列的牌位編號
+        // ?????3??????
         positionary_albary[2] = albrow3.split(",");
-        // 取得乙區第4列的牌位編號
+        // ?????4??????
         positionary_albary[3] = albrow4.split(",");
-        // 取得乙區第5列的牌位編號
+        // ?????5??????
         positionary_albary[4] = albrow5.split(",");
-        // 取得乙區第6列的牌位編號
+        // ?????6??????
         positionary_albary[5] = albrow6.split(",");
-        // 取得乙區第7列的牌位編號
+        // ?????7??????
         positionary_albary[6] = albrow7.split(",");
-        // 取得乙區第8列的牌位編號
+        // ?????8??????
         positionary_albary[7] = albrow8.split(",");
-        // 取得乙區第9列的牌位編號
+        // ?????9??????
         positionary_albary[8] = albrow9.split(",");
-        // 取得乙區第10列的牌位編號
+        // ?????10??????
         positionary_albary[9] = albrow10.split(",");
 
-        //丙區,各層牌位資料陣列
+        //??,????????
         var positionary_alcary = Array.from({ length: @(ViewBag.lcr ?? 0) }, () => Array(@(ViewBag.lcc ?? 0)).fill(0));
-        // 取得丙區第1列的牌位編號
+        // ?????1??????
         positionary_alcary[0] = alcrow1.split(",");
-        // 取得丙區第2列的牌位編號
+        // ?????2??????
         positionary_alcary[1] = alcrow2.split(",");
-        // 取得丙區第3列的牌位編號
+        // ?????3??????
         positionary_alcary[2] = alcrow3.split(",");
-        // 取得丙區第4列的牌位編號
+        // ?????4??????
         positionary_alcary[3] = alcrow4.split(",");
-        // 取得丙區第5列的牌位編號
+        // ?????5??????
         positionary_alcary[4] = alcrow5.split(",");
-        // 取得丙區第6列的牌位編號
+        // ?????6??????
         positionary_alcary[5] = alcrow6.split(",");
-        // 取得丙區第7列的牌位編號
+        // ?????7??????
         positionary_alcary[6] = alcrow7.split(",");
-        // 取得丙區第8列的牌位編號
+        // ?????8??????
         positionary_alcary[7] = alcrow8.split(",");
-        // 取得丙區第9列的牌位編號
+        // ?????9??????
         positionary_alcary[8] = alcrow9.split(",");
-        // 取得丙區第10列的牌位編號
+        // ?????10??????
         positionary_alcary[9] = alcrow10.split(",");
 
-        //丁區,各層牌位資料陣列
+        //??,????????
         var positionary_aldary = Array.from({ length: @(ViewBag.ldr ?? 0) }, () => Array(@(ViewBag.ldc ?? 0)).fill(0));
-        // 取得丁區第1列的牌位編號
+        // ?????1??????
         positionary_aldary[0] = aldrow1.split(",");
-        // 取得丁區第2列的牌位編號
+        // ?????2??????
         positionary_aldary[1] = aldrow2.split(",");
-        // 取得丁區第3列的牌位編號
+        // ?????3??????
         positionary_aldary[2] = aldrow3.split(",");
-        // 取得丁區第4列的牌位編號
+        // ?????4??????
         positionary_aldary[3] = aldrow4.split(",");
-        // 取得丁區第5列的牌位編號
+        // ?????5??????
         positionary_aldary[4] = aldrow5.split(",");
-        // 取得丁區第6列的牌位編號
+        // ?????6??????
         positionary_aldary[5] = aldrow6.split(",");
-        // 取得丁區第7列的牌位編號
+        // ?????7??????
         positionary_aldary[6] = aldrow7.split(",");
-        // 取得丁區第8列的牌位編號
+        // ?????8??????
         positionary_aldary[7] = aldrow8.split(",");
-        // 取得丁區第9列的牌位編號
+        // ?????9??????
         positionary_aldary[8] = aldrow9.split(",");
-        // 取得丁區第10列的牌位編號
+        // ?????10??????
         positionary_aldary[9] = aldrow10.split(",");
 
         //2025 08 26 14:28
-        //左側 中區,各層牌位資料陣列
+        //?? ??,????????
         var positionary_almary = Array.from({ length: @(ViewBag.lmr ?? 0) }, () => Array(@(ViewBag.lmc ?? 0)).fill(0));
-        // 取得丁區第1列的牌位編號
+        // ?????1??????
         positionary_almary[0] = almrow1.split(",");
-        // 取得丁區第2列的牌位編號
+        // ?????2??????
         positionary_almary[1] = almrow2.split(",");
-        // 取得丁區第3列的牌位編號
+        // ?????3??????
         positionary_almary[2] = almrow3.split(",");
-        // 取得丁區第4列的牌位編號
+        // ?????4??????
         positionary_almary[3] = almrow4.split(",");
-        // 取得丁區第5列的牌位編號
+        // ?????5??????
         positionary_almary[4] = almrow5.split(",");
-        // 取得丁區第6列的牌位編號
+        // ?????6??????
         positionary_almary[5] = almrow6.split(",");
-        // 取得丁區第7列的牌位編號
+        // ?????7??????
         positionary_almary[6] = almrow7.split(",");
-        // 取得丁區第8列的牌位編號
+        // ?????8??????
         positionary_almary[7] = almrow8.split(",");
-        // 取得丁區第9列的牌位編號
+        // ?????9??????
         positionary_almary[8] = almrow9.split(",");
-        // 取得丁區第10列的牌位編號
+        // ?????10??????
         positionary_almary[9] = almrow10.split(",");
 
-       //右側,甲區~丁區 各層牌位資料陣列
+       //??,??~?? ????????
        var positionary_araary = Array.from({ length: @(ViewBag.rar ?? 0) }, () => Array(@(ViewBag.rac ?? 0)).fill(0));
 
-        // 取得甲區第1列的牌位編號
+        // ?????1??????
         positionary_araary[0] = ararow1.split(",");
-        // 取得甲區第2列的牌位編號
+        // ?????2??????
         positionary_araary[1] = ararow2.split(",");
-        // 取得甲區第3列的牌位編號
+        // ?????3??????
         positionary_araary[2] = ararow3.split(",");
-        // 取得甲區第4列的牌位編號
+        // ?????4??????
         positionary_araary[3] = ararow4.split(",");
-        // 取得甲區第5列的牌位編號
+        // ?????5??????
         positionary_araary[4] = ararow5.split(",");
-        // 取得甲區第6列的牌位編號
+        // ?????6??????
         positionary_araary[5] = ararow6.split(",");
-        // 取得甲區第7列的牌位編號
+        // ?????7??????
         positionary_araary[6] = ararow7.split(",");
-        // 取得甲區第8列的牌位編號
+        // ?????8??????
         positionary_araary[7] = ararow8.split(",");
-        // 取得甲區第9列的牌位編號
+        // ?????9??????
         positionary_araary[8] = ararow9.split(",");
-        // 取得甲區第10列的牌位編號
+        // ?????10??????
         positionary_araary[9] = ararow10.split(",");
 
-        //乙區,各層牌位資料陣列
+        //??,????????
         var positionary_arbary = Array.from({ length: @(ViewBag.rbr ?? 0) }, () => Array(@(ViewBag.rbc ?? 0)).fill(0));
 
-        // 取得乙區第1列的牌位編號
+        // ?????1??????
         positionary_arbary[0] = arbrow1.split(",");
-        // 取得乙區第2列的牌位編號
+        // ?????2??????
         positionary_arbary[1] = arbrow2.split(",");
-        // 取得乙區第3列的牌位編號
+        // ?????3??????
         positionary_arbary[2] = arbrow3.split(",");
-        // 取得乙區第4列的牌位編號
+        // ?????4??????
         positionary_arbary[3] = arbrow4.split(",");
-        // 取得乙區第5列的牌位編號
+        // ?????5??????
         positionary_arbary[4] = arbrow5.split(",");
-        // 取得乙區第6列的牌位編號
+        // ?????6??????
         positionary_arbary[5] = arbrow6.split(",");
-        // 取得乙區第7列的牌位編號
+        // ?????7??????
         positionary_arbary[6] = arbrow7.split(",");
-        // 取得乙區第8列的牌位編號
+        // ?????8??????
         positionary_arbary[7] = arbrow8.split(",");
-        // 取得乙區第9列的牌位編號
+        // ?????9??????
         positionary_arbary[8] = arbrow9.split(",");
-        // 取得乙區第10列的牌位編號
+        // ?????10??????
         positionary_arbary[9] = arbrow10.split(",");
 
-        //丙區,各層牌位資料陣列
+        //??,????????
         var positionary_arcary = Array.from({ length: @(ViewBag.rcr ?? 0) }, () => Array(@(ViewBag.rcc ?? 0)).fill(0));
-        // 取得丙區第1列的牌位編號
+        // ?????1??????
         positionary_arcary[0] = arcrow1.split(",");
-        // 取得丙區第2列的牌位編號
+        // ?????2??????
         positionary_arcary[1] = arcrow2.split(",");
-        // 取得丙區第3列的牌位編號
+        // ?????3??????
         positionary_arcary[2] = arcrow3.split(",");
-        // 取得丙區第4列的牌位編號
+        // ?????4??????
         positionary_arcary[3] = arcrow4.split(",");
-        // 取得丙區第5列的牌位編號
+        // ?????5??????
         positionary_arcary[4] = arcrow5.split(",");
-        // 取得丙區第6列的牌位編號
+        // ?????6??????
         positionary_arcary[5] = arcrow6.split(",");
-        // 取得丙區第7列的牌位編號
+        // ?????7??????
         positionary_arcary[6] = arcrow7.split(",");
-        // 取得丙區第8列的牌位編號
+        // ?????8??????
         positionary_arcary[7] = arcrow8.split(",");
-        // 取得丙區第9列的牌位編號
+        // ?????9??????
         positionary_arcary[8] = arcrow9.split(",");
-        // 取得丙區第10列的牌位編號
+        // ?????10??????
         positionary_arcary[9] = arcrow10.split(",");
 
-        //丁區,各層牌位資料陣列
+        //??,????????
         var positionary_ardary = Array.from({ length: @(ViewBag.rdr ?? 0) }, () => Array(@(ViewBag.rdc ?? 0)).fill(0));
-        // 取得丁區第1列的牌位編號
+        // ?????1??????
         positionary_ardary[0] = ardrow1.split(",");
-        // 取得丁區第2列的牌位編號
+        // ?????2??????
         positionary_ardary[1] = ardrow2.split(",");
-        // 取得丁區第3列的牌位編號
+        // ?????3??????
         positionary_ardary[2] = ardrow3.split(",");
-        // 取得丁區第4列的牌位編號
+        // ?????4??????
         positionary_ardary[3] = ardrow4.split(",");
-        // 取得丁區第5列的牌位編號
+        // ?????5??????
         positionary_ardary[4] = ardrow5.split(",");
-        // 取得丁區第6列的牌位編號
+        // ?????6??????
         positionary_ardary[5] = ardrow6.split(",");
-        // 取得丁區第7列的牌位編號
+        // ?????7??????
         positionary_ardary[6] = ardrow7.split(",");
-        // 取得丁區第8列的牌位編號
+        // ?????8??????
         positionary_ardary[7] = ardrow8.split(",");
-        // 取得丁區第9列的牌位編號
+        // ?????9??????
         positionary_ardary[8] = ardrow9.split(",");
-        // 取得丁區第10列的牌位編號
+        // ?????10??????
         positionary_ardary[9] = ardrow10.split(",");
 
         //2025 08 26 14:28
-        //右側 中區,各層牌位資料陣列
+        //?? ??,????????
         var positionary_armary = Array.from({ length: @(ViewBag.rmr ?? 0) }, () => Array(@(ViewBag.rmc ?? 0)).fill(0));
-        // 取得丁區第1列的牌位編號
+        // ?????1??????
         positionary_armary[0] = armrow1.split(",");
-        // 取得丁區第2列的牌位編號
+        // ?????2??????
         positionary_armary[1] = armrow2.split(",");
-        // 取得丁區第3列的牌位編號
+        // ?????3??????
         positionary_armary[2] = armrow3.split(",");
-        // 取得丁區第4列的牌位編號
+        // ?????4??????
         positionary_armary[3] = armrow4.split(",");
-        // 取得丁區第5列的牌位編號
+        // ?????5??????
         positionary_armary[4] = armrow5.split(",");
-        // 取得丁區第6列的牌位編號
+        // ?????6??????
         positionary_armary[5] = armrow6.split(",");
-        // 取得丁區第7列的牌位編號
+        // ?????7??????
         positionary_armary[6] = armrow7.split(",");
-        // 取得丁區第8列的牌位編號
+        // ?????8??????
         positionary_armary[7] = armrow8.split(",");
-        // 取得丁區第9列的牌位編號
+        // ?????9??????
         positionary_armary[8] = armrow9.split(",");
-        // 取得丁區第10列的牌位編號
+        // ?????10??????
         positionary_armary[9] = armrow10.split(",");
 
 
-         // 取得左,,側 各區的編碼 2025 07 12 13:14
+         // ???,,? ????? 2025 07 12 13:14
         var alayout_ary = Array.from({ length: @(ViewBag.AncestralSide ?? 0) }, () => Array(@(ViewBag.AncestralSection ?? 0)).fill(0));
-         // 取得左側 各區的編碼 2025 07 12 13:14
+         // ???? ????? 2025 07 12 13:14
         alayout_ary[0] = allayout.split(",");
-         // 取得右側 各區的編碼 2025 07 12 13:14
+         // ???? ????? 2025 07 12 13:14
         alayout_ary[1] = arlayout.split(",");
 
-         // 取得左,,側 各區的編碼 2025 07 12 13:14
+         // ???,,? ????? 2025 07 12 13:14
         var alayout_ary = Array.from({ length: @(ViewBag.AncestralSide - 1 ?? 0) }, () => Array(@(ViewBag.AncestralSection * 2 ?? 0)).fill(0));
-         // 取得左側 各區的編碼 2025 07 12 13:14
+         // ???? ????? 2025 07 12 13:14
         alayout_ary[0] = alayout.split(",");
 
         ////////////////////////////
-        //三.顯示牌位圖
+        //?.?????
         ///////////////////////////
 
         /////////////////////////
-        //左側, 甲區~丁區 各層牌位
+        //??, ??~?? ????
         /////////////////////////
 
               /////////////////////////
-        //左側, 甲區~丁區 各層牌位
+        //??, ??~?? ????
         /////////////////////////
-        //(1)牌位,新的編排
-        // l:左側 // 辛區 // 己區// 丁區// 乙區
+        //(1)??,????
+        // l:?? // ?? // ??// ??// ??
         //===============
-        // r:右側 // 甲區 // 丙區 // 戊區 //庚區
+        // r:?? // ?? // ?? // ?? //??
 
          //2025 08 26 14:28
-         // 顯示左側-中區牌位:
-        var desc="左側-中區-";
+         // ????-????:
+        var desc="??-??-";
         renderPositionRows("RootDiv_Ancestral_left",positionary_almary,desc,'levelleft','positionAncestral');
 
-        // 顯示左側甲區牌位:
-        desc="左側-乙區-";
+        // ????????:
+        desc="??-??-";
         renderPositionRows("RootDiv_Ancestral_left",positionary_alaary,desc,'levelleft','positionAncestral');
 
-         // 顯示左側乙區牌位:
-        desc="左側-丁區-";
+         // ????????:
+        desc="??-??-";
         renderPositionRows("RootDiv_Ancestral_left",positionary_albary,desc,'levelleft','positionAncestral');
 
-          // 顯示左側丙區牌位:
-        desc="左側-己區-";
+          // ????????:
+        desc="??-??-";
         renderPositionRows("RootDiv_Ancestral_left",positionary_alcary,desc,'levelleft','positionAncestral');
 
 
-        // 顯示左側丁區牌位:
-        desc="左側-辛區-";
+        // ????????:
+        desc="??-??-";
         renderPositionRows("RootDiv_Ancestral_left",positionary_aldary,desc,'levelleft','positionAncestral');
 
         /////////////////////////
-        //右側, 甲區~丁區 各層牌位
+        //??, ??~?? ????
         /////////////////////////
         //2025 08 26 14:28
-        // 顯示右側-中區牌位:
-        var desc="右側-中區-";
+        // ????-????:
+        var desc="??-??-";
         renderPositionRows("RootDiv_Ancestral_right",positionary_armary,desc,'levelleft','positionAncestral')
 
-        // 顯示右側甲區牌位:
-        desc="右側-甲區-";
+        // ????????:
+        desc="??-??-";
         renderPositionRows("RootDiv_Ancestral_right",positionary_araary,desc,'levelright','positionAncestral');
 
-        // 顯示右側乙區牌位:
-        desc="右側-丙區-";
+        // ????????:
+        desc="??-??-";
         renderPositionRows("RootDiv_Ancestral_right",positionary_arbary,desc,'levelright','positionAncestral');
 
-        // 顯示右側丙區牌位:
-        desc="右側-戊區-";
+        // ????????:
+        desc="??-??-";
         renderPositionRows("RootDiv_Ancestral_right",positionary_arcary,desc,'levelright','positionAncestral');
 
-        // 顯示右側丁區牌位:
-        desc="右側-庚區-";
+        // ????????:
+        desc="??-??-";
         renderPositionRows("RootDiv_Ancestral_right",positionary_ardary, desc,'levelright','positionAncestral');
 
 
-         // 功能:這個函數用來渲染宗祠的牌位配圖(顯示各側,各區位圖)
-        // 參數:positionary_asideary 各側,各區資料
+         // ??:???????????????(????,????)
+        // ??:positionary_asideary ??,????
          function renderLayoutSideSection(root_div,positionary_asideary,desc,levelClassName,positionClassName)
         {
                // alert('desc : '+desc);
@@ -697,34 +697,34 @@
                // alert('positionary_asideary : '+positionary_asideary);
                // alert('levelClassName : '+levelClassName);
             let sideDiv= document.createElement('div');
-               // 設定class為row
+               // ??class?row
             sideDiv.className = 'row';
             for (let i =0; i <= positionary_asideary.length-1 ; i++) {
-                    //區名
+                    //??
                     let  section = positionary_asideary[i];
-                    // 創建一個span元素來表示這個區
+                    // ????span????????
                     let SectionSpan = document.createElement('span');
-                    SectionSpan.readOnly = true //關閉點選
-                    SectionSpan.innerText = section;   // 內容:區名 eg: 右: 甲,丙,戊,庚 /  左: 乙,丁,己,辛
-                    SectionSpan.className = positionClassName; // 設定class為可用的position
-                    // 將這個span元素添加到rowDiv中
+                    SectionSpan.readOnly = true //????
+                    SectionSpan.innerText = section;   // ??:?? eg: ?: ?,?,?,? /  ?: ?,?,?,?
+                    SectionSpan.className = positionClassName; // ??class????position
+                    // ???span?????rowDiv?
                     sideDiv.appendChild(SectionSpan);
                 }
-                // 創建一個span元素來表示這個塔區說明 desc
+                // ????span??????????? desc
                     // let descSpan = document.createElement('span');
-                    // descSpan.readOnly = true //關閉點選
-                    // descSpan.className = levelClassName; // 設定class為classname
-                    // descSpan.innerText = desc; // 設定文字內容為塔位編號
+                    // descSpan.readOnly = true //????
+                    // descSpan.className = levelClassName; // ??class?classname
+                    // descSpan.innerText = desc; // ???????????
                      // Add the span to the sideDiv
-                     // 將這個descSpan元素添加到sideDiv中
+                     // ???descSpan?????sideDiv?
                     //sideDiv.appendChild(descSpan);
                 // Add the row div to the container
-                // 將這一列的div添加到RootDiv_Kindness中
+                // ?????div???RootDiv_Kindness?
                 document.getElementById(root_div).appendChild(sideDiv);
          }
 
-        // 功能:這個函數用來渲染宗祠的牌位圖(顯示各側,各區,層,牌位圖)
-        // 參數:positionary_asideary 各側,各區,層,牌位資料
+        // ??:??????????????(????,??,?,???)
+        // ??:positionary_asideary ??,??,?,????
          function renderPositionRows(root_div,positionary_asideary,desc,levelClassName,positionClassName) {
             //Get each Row ID
             let rowId = "";
@@ -732,47 +732,47 @@
                 //Get each Row ID
                 rowId = (i+1)
                 // Get each row of position IDs
-                // 取得每一列的塔位編號
+                // ??????????
                 let row = positionary_asideary[i];
                 // Create a div for the row
-                // 創建一個div元素來表示這一列
+                // ????div????????
                 let rowDiv = document.createElement('div');
-                // 設定class為row
+                // ??class?row
                 rowDiv.className = 'row';
                 for (let j=0; j <= row.length-1;j++) {
                     // Get each position ID
-                    // 取得每一個塔位編號
-                    let position=row[j]; //塔位編號
-                    let positionId = desc+rowId+"層:" + position;  //eg:左側-甲區-7:34  format:側-區-層:位
+                    // ?????????
+                    let position=row[j]; //????
+                    let positionId = desc+rowId+"?:" + position;  //eg:??-??-7:34  format:?-?-?:?
                     // Create a span for the position
-                    // 創建一個span元素來表示這個塔位
+                    // ????span?????????
                     let positionSpan = document.createElement('span');
-                    positionSpan.readOnly = true //關閉點選
+                    positionSpan.readOnly = true //????
                     if (position==="000")
                     {
-                           positionSpan.className = 'position_window_door'; // 門/窗位置,要跳開
-                           positionSpan.innerText = '通氣窗-出入口';   // 內容:設定'門/窗位置,請略過'
+                           positionSpan.className = 'position_window_door'; // ?/???,???
+                           positionSpan.innerText = '???-???';   // ??:??'?/???,???'
                     }
                     else
                     {
-                           positionSpan.className = positionClassName; // 設定class為可用的position
-                           positionSpan.innerText = positionId; // 設定文字內容為塔位編號
+                           positionSpan.className = positionClassName; // ??class????position
+                           positionSpan.innerText = positionId; // ???????????
                     }
 
                     // Add the span to the row div
-                    // 將這個span元素添加到rowDiv中
+                    // ???span?????rowDiv?
                     rowDiv.appendChild(positionSpan);
                 }
-                // 創建一個span元素來表示這個塔區說明 desc
+                // ????span??????????? desc
                     let positionSpan = document.createElement('span');
-                    positionSpan.readOnly = true //關閉點選
-                    positionSpan.className = levelClassName; // 設定class為classname
-                    positionSpan.innerText = desc.replace("\n","") +(i+1)+"層"; // 設定文字內容為塔位編號
+                    positionSpan.readOnly = true //????
+                    positionSpan.className = levelClassName; // ??class?classname
+                    positionSpan.innerText = desc.replace("\n","") +(i+1)+"?"; // ???????????
                      // Add the span to the row div
-                    // 將這個span元素添加到rowDiv中
+                    // ???span?????rowDiv?
                     rowDiv.appendChild(positionSpan);
                 // Add the row div to the container
-                // 將這一列的div添加到RootDiv_Kindness中
+                // ?????div???RootDiv_Kindness?
                 document.getElementById(root_div).appendChild(rowDiv);
             }
         }
@@ -782,16 +782,16 @@
         function populateSectionUI() {
 
             const positions = document.querySelectorAll('.sectionAncestral');
-            var section = @Html.Raw(JsonSerializer.Serialize(ViewBag.section)); //目前查詢的區
+            var section = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.section)); //??????
             //alert('section: '+section);
                 if(section.length > 0) {
                     positions.forEach(position => {
-                        var  bool_result= (section+"區")==position.innerText;;//找到 ===編號
+                        var  bool_result= (section+"?")==position.innerText;;//?? ===??
                         //alert('bool_result: ' +bool_result);
                         if (bool_result) {
-                            position.classList.add('Ancestralsectioncurrent');//已使用塔位用'Ancestralsectioncurrent'
-                            position.classList.add('blink'); // 閃爍 2025 07 30 23:42
-                            //position.innerText += ('-'+ @Html.Raw(JsonSerializer.Serialize(ViewBag.PositionId))); //目前查詢的塔位
+                            position.classList.add('Ancestralsectioncurrent');//??????'Ancestralsectioncurrent'
+                            position.classList.add('blink'); // ?? 2025 07 30 23:42
+                            //position.innerText += ('-'+ @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.PositionId))); //???????
                             }
                     });
                     }
@@ -804,36 +804,36 @@
             const positions = document.querySelectorAll('.positionAncestral');
             //alert('positions.length: '+positions.length);
 
-                //已進駐祖先的塔位清單儲入 ViewBag.ListPositionId
-            var listPositionId = @Html.Raw(JsonSerializer.Serialize(ViewBag.ListPositionId));
+                //???????????? ViewBag.ListPositionId
+            var listPositionId = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.ListPositionId));
             //alert('listPositionId.length: '+listPositionId.length);
                 if(listPositionId.length > 0) {
                     //alert('kind==1');
                     //alert('ListPositionId: ' + JSON.stringify(listPositionId));
                     positions.forEach(position => {
-                        listPositionId.forEach(positionid => {  //位置編號 //positionid  eg: '1樓-甲區-7層-234,陳公1'
+                        listPositionId.forEach(positionid => {  //???? //positionid  eg: '1?-??-7?-234,??1'
                         var  Local_positionid=position.innerText;
-                        //alert('Local_positionid: ' +Local_positionid);//位置內容 eg: '1樓-甲區-7層-234'
-                        var  positionId_compared=positionid.substr(0,positionid.indexOf(","));  // 取得逗號[前]的文字:編號
+                        //alert('Local_positionid: ' +Local_positionid);//???? eg: '1?-??-7?-234'
+                        var  positionId_compared=positionid.substr(0,positionid.indexOf(","));  // ????[?]???:??
                         //alert('positionId_compared: ' +positionId_compared);
-                        var  name=positionid.substr(positionid.indexOf(",")+1);  // 取得逗號[後]的文字:祖先名諱
+                        var  name=positionid.substr(positionid.indexOf(",")+1);  // ????[?]???:????
                         //alert('name: ' +name);
-                        var  bool_result=positionId_compared===Local_positionid;//找到 ===編號
+                        var  bool_result=positionId_compared===Local_positionid;//?? ===??
                         //alert('bool_result: ' +bool_result);
-                          //目前查詢的塔位
-                        var currentPositonId=  @Html.Raw(JsonSerializer.Serialize(ViewBag.PositionId));
+                          //???????
+                        var currentPositonId=  @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.PositionId));
                         if (bool_result) {
-                            position.classList.add('occupied');//已使用塔位用灰色
+                            position.classList.add('occupied');//????????
                             position.innerText += ('-'+ name);
-                             if (currentPositonId === Local_positionid) //目前查詢的牌位
+                             if (currentPositonId === Local_positionid) //???????
                               {
-                                 position.classList.add('current');//目前查詢的牌位用青色
-                                 position.classList.add('blink');// 閃爍 目前查詢的牌位 2025 07 31 23:57
-                                 var  sideSectionLevel=positionid.substr(0,positionid.indexOf(":"));  // 取得[:][前]的文字:側邊-區號-層數
+                                 position.classList.add('current');//??????????
+                                 position.classList.add('blink');// ?? ??????? 2025 07 31 23:57
+                                 var  sideSectionLevel=positionid.substr(0,positionid.indexOf(":"));  // ??[:][?]???:??-??-??
                                  //alert('sideSectionLevel'+sideSectionLevel);
                                  var targetSpan = findSpanByInnerText(sideSectionLevel);
                                      if (targetSpan) {
-                                         targetSpan.classList.add('blink');// 閃爍 目前查詢的牌位之'側邊-區號-層數' 2025 07 31 23:57
+                                         targetSpan.classList.add('blink');// ?? ????????'??-??-??' 2025 07 31 23:57
                                     }
                               }
                             }
@@ -855,15 +855,15 @@
         return null; // Not found
        }
 
-          //側,區別查詢
+          //?,????
         function filterPositionsBySideAndSection(side, section) {
-        // Normalize for "全部"
+        // Normalize for "??"
         const allSides = (side === "0");
         const allSections = (section === "0");
 
         // Build label for matching
-        const sideLabel = allSides ? "" : side + "側";
-        const sectionLabel = allSections ? "" : section + "區";
+        const sideLabel = allSides ? "" : side + "?";
+        const sectionLabel = allSections ? "" : section + "?";
 
          // 2025 07 15 01:43 Count right side positions fitted to [sideLabel] && [sectionLabel]:
             var PositionsFitted_count=0;
@@ -882,8 +882,8 @@
 
             if (PositionsFitted_count==0)
             {
-               openMsgModal("請留意:["+ side +"]側不存在["+section+"]區,請確認後再試! 註:(1)左側:辛區,己區,丁區,乙區,中區"+
-                "(2)右側:甲區,丙區,戊區,庚區,中區 " );
+               openMsgModal("???:["+ side +"]????["+section+"]?,??????! ?:(1)??:??,??,??,??,??"+
+                "(2)??:??,??,??,??,?? " );
                 // 2025 07 15 09:31 make Button 'displayWantedSideSecBtn' invisible
                 document.getElementById('displayWantedSideSecBtn').style.display = 'none';
             }
@@ -915,11 +915,11 @@
                     row.style.display = (sideMatch && sectionMatch) ? '' : 'none';
                 });
 
-                   // 顯示左右各區:
-                desc="塔位-樓層,區域";
+                   // ??????:
+                desc="??-??,??";
                 renderLayoutSideSection("RootDiv_Ancestral_layout", alayout_ary[0],desc,'levelleft','sectionAncestral');
 
-                /*2025 07 18 15:13 Make 一郎公神位 Higher than others*/
+                /*2025 07 18 15:13 Make ????? Higher than others*/
                 MakeFirstClanHigher();
 
                 //alert(displayed_positionid)
@@ -928,15 +928,15 @@
         }
     }
 
-     //目前查詢的牌位所在;
+     //?????????;
 
-     let side = @Html.Raw(JsonSerializer.Serialize(ViewBag.side));
-     let section = @Html.Raw(JsonSerializer.Serialize(ViewBag.section));
+     let side = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.side));
+     let section = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.section));
      filterPositionsBySideAndSection(side, section);
 
-      //顯示已進駐祖先之塔位
+      //??????????
       populateUI();
-      //顯示祖先塔位 (不能在前面執行,因為,塔位資訊尚未載入!!)
+      //?????? (???????,??,????????!!)
 
       //(1) find the Section for the wanted clan
       populateSectionUI();
@@ -945,7 +945,7 @@
 
         function openQueryModalWithData() {
         var displayed_section = document.getElementById('RootDiv_Ancestral_layout').innerHTML;
-          //祖先名諱
+          //????
         var name = document.getElementById('Ancestral_Name').innerHTML;
         var positionId = document.getElementById('Ancestral_PositionId').innerHTML;
         //var applicant=document.getElementById('Ancestral_Applicant').innerHTML;
@@ -980,15 +980,15 @@
 
 
 
-    /*2025 07 18 11:25 Make 一郎公神位 Higher than others*/
+    /*2025 07 18 11:25 Make ????? Higher than others*/
     function MakeFirstClanHigher() {
         const container = document.getElementById('RootDiv_Ancestral_layout');
         const spans = container.querySelectorAll('span');
         spans.forEach(span => {
-            if (span.innerText.trim() === "中區") {   //中區一郎公-->中區   2025 08 26 16:36
+            if (span.innerText.trim() === "??") {   //?????-->??   2025 08 26 16:36
                 // Found!
                 span.classList.add('position-ancestor-layout');
-                //span.classList.add('blink_firstMan'); // 閃爍 2025 07 31 00:01
+                //span.classList.add('blink_firstMan'); // ?? 2025 07 31 00:01
             }
         });
     }
@@ -1028,9 +1028,9 @@
 </script>
 
 <script type="text/javascript">
-    window.AUTO_LOGOUT_MINUTES = @Html.Raw(JsonSerializer.Serialize(ViewBag.AUTO_LOGOUT_MINUTE));
-    window.WARNING_BEFORE_LOGOUT_SECONDS = @Html.Raw(JsonSerializer.Serialize(ViewBag.WARNING_BEFORE_LOGOUT_SECOND));
-    window.WORK_DURATION_MINUTES = @Html.Raw(JsonSerializer.Serialize(ViewBag.Work_Duration));
-    window.WORK_WARNING_SECONDS = @Html.Raw(JsonSerializer.Serialize(ViewBag.WORK_WARNING_SECONDS));
+    window.AUTO_LOGOUT_MINUTES = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.AUTO_LOGOUT_MINUTE));
+    window.WARNING_BEFORE_LOGOUT_SECONDS = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.WARNING_BEFORE_LOGOUT_SECOND));
+    window.WORK_DURATION_MINUTES = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.Work_Duration));
+    window.WORK_WARNING_SECONDS = @Html.Raw(JsonSerializer.Serialize<object>(ViewBag.WORK_WARNING_SECONDS));
 </script>
 <script src="~/js/AutoLogout.js" asp-append-version="true"></script>
