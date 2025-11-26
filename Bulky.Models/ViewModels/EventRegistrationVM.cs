@@ -10,9 +10,9 @@ namespace BulkyBook.Models.ViewModels
 {
     public class EventRegistrationVM
     {
-        public EventRegistration EventRegistration { get; set; }
+        public EventRegistration EventRegistration { get; set; } = new EventRegistration();
         [ValidateNever]
-        public IEnumerable<SelectListItem> ProductList { get; set; }
+        public IEnumerable<SelectListItem> ProductList { get; set; } = new List<SelectListItem>();
     }
    
 }
