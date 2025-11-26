@@ -23,6 +23,27 @@ Which Option(s) or priority would you seggest me to do next(A or B or C)? Tks!
 2025 11 26 09:35
 ==================
 
+
+------------------
+2025 11 26 15:32 
+want browser-based DataTables to stop showing the Ajax error
+------------------
+
+
+Notes and next steps:
+
+If you want the browser-based DataTables to stop showing the Ajax error, open DevTools → Network and confirm the request now goes to /api/admin/product (status 200 with JSON: { data: [...] }). If caching is an issue, do a hard reload (Ctrl+F5).
+I left LockUnlock pointing at the MVC action (/Admin/User/LockUnlock) because it performs server-side actions and returns a JSON response; we can move it to an API route later if you want a fully RESTful pattern.
+Would you like me to:
+Patch other JS files (orders, kindness, ancestral) in the same way?
+Commit & push these JS edits (I can push them if you want).
+Patch other JS files (orders, kindness, ancestral) in the same way, and then
+Commit & push these JS edits. tks!
+
+I'll read the three JS files to locate DataTables AJAX URLs and delete links before patching them.
+
+
+
 ------------------
 2025 11 26 15:02
 ------------------

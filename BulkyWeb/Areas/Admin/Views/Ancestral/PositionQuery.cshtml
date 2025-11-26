@@ -167,7 +167,7 @@
          function loadDataTable() {
              dataTable = $('#tblData').DataTable({
                  ajax: {
-                     "url": "/admin/ancestral/getall",
+                     "url": "/api/admin/ancestral",
                      "type": "GET",
                     data: function (d) {    //* 2025 08 27 01:12 搜尋祖先姓名
                         d.search = $('#searchBox').val();

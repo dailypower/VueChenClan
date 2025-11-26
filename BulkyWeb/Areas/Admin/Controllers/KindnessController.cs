@@ -27,6 +27,12 @@ namespace BulkyBookWeb.Areas.Admin.Controllers
             ViewBag.SystemStartTime = SystemStartTime;
         }
 
+        public IActionResult Index()
+        {
+            var objKindnessList = _unitOfWork.Kindness.GetAll().ToList();
+            return View(objKindnessList);
+        }
+
         /// <summary>
         /// (??)??:2025 05 16 16:39
         ///   ????:2025 05 24 13:10
